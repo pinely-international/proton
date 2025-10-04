@@ -4,7 +4,7 @@ import { themes as prismThemes } from "prism-react-renderer"
 
 const config: Config = {
   title: "Proton",
-  tagline: "Rootless UI Building | Encapsulated Micro-Frontends",
+  tagline: "DOM-first, Signal-based UI Framework | ~5kb gzipped, Zero config, Rootless components",
   favicon: "img/logo.svg",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -106,6 +106,12 @@ const config: Config = {
           label: "Benchmarks",
         },
         {
+          type: "doc",
+          docId: "api-reference",
+          position: "left",
+          label: "API",
+        },
+        {
           href: "https://github.com/denshya/proton",
           label: "GitHub",
           position: "right",
@@ -116,11 +122,40 @@ const config: Config = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: "Documentation",
           items: [
             {
               label: "Getting Started",
-              to: "/learn",
+              to: "/learn/learn",
+            },
+            {
+              label: "API Reference",
+              to: "/api-reference",
+            },
+            {
+              label: "Migration Guide",
+              to: "/learn/migration-guide",
+            },
+            {
+              label: "Specification",
+              to: "/specification",
+            },
+          ],
+        },
+        {
+          title: "Examples",
+          items: [
+            {
+              label: "Interactive Demos",
+              to: "/demos/demos",
+            },
+            {
+              label: "StackBlitz Playground",
+              href: "https://stackblitz.com/@FrameMuse/collections/proton",
+            },
+            {
+              label: "GitHub Examples",
+              href: "https://github.com/denshya/proton/tree/main/demos",
             },
           ],
         },
@@ -128,8 +163,16 @@ const config: Config = {
           title: "Community",
           items: [
             {
+              label: "GitHub Discussions",
+              href: "https://github.com/denshya/proton/discussions",
+            },
+            {
               label: "Discord",
               href: "https://discordapp.com/invite/sHp2pxrSws",
+            },
+            {
+              label: "Issues",
+              href: "https://github.com/denshya/proton/issues",
             },
           ],
         },
@@ -140,10 +183,18 @@ const config: Config = {
               label: "GitHub",
               href: "https://github.com/denshya/proton",
             },
+            {
+              label: "NPM Package",
+              href: "https://www.npmjs.com/package/@denshya/proton",
+            },
+            {
+              label: "Benchmarks",
+              to: "/benchmarks",
+            },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Denshya Community Movement. Started within Pinely International. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Proton Contributors. Built with ❤️ and TypeScript.`,
     },
     prism: {
       theme: prismThemes.github,

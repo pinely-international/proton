@@ -2,58 +2,66 @@
 sidebar_position: 1
 ---
 
-# Getting Started
+# Getting Started with Proton
 
-## Install
+Proton is a lightweight, DOM-first UI framework that brings Signal-based reactivity to web development. With no build configuration required and a tiny ~5kb footprint, you can start building reactive UIs immediately.
+
+## Why Choose Proton?
+
+- 🚀 **Tiny Bundle**: Only ~5kb gzipped
+- 🔄 **Signal-Native**: Built for observable-based state management  
+- 🏗️ **Rootless**: Components can be mounted anywhere
+- ⚡ **Zero Config**: No build plugins or complex setup required
+- 🎯 **Class-Based**: Extensible, tree-shakeable architecture
+- 🔒 **Error Isolation**: Child errors don't crash parent components
+
+## Installation
+
+Install Proton and a bundler (Vite recommended):
 
 ```bash
-bun i -D vite
 bun i @denshya/proton
+bun i -D vite
 ```
 
-## Setup
+:::tip
+Any bundler works with Proton - no special plugins required!
+:::
 
-Use `vite`
+## Project Setup
+
+### Package Configuration
 
 ```json title="package.json"
 {
   "type": "module",
-  // ...
   "scripts": {
     "dev": "vite",
-  },
-  "dependencies": {
-    // ...
-  },
+    "build": "vite build"
+  }
 }
 ```
 
-:::info
+### TypeScript Configuration
 
-Any bundler works (not just `vite`), no bundler plugins required.
-
-:::
-
-Enable Proton JSX
+Enable Proton's JSX runtime:
 
 ```json title="tsconfig.json"
 {
   "compilerOptions": {
-    // ...
     "jsx": "react-jsx",
     "jsxImportSource": "@denshya/proton/jsx/virtual",
-    // ...
+    "target": "ES2020",
+    "module": "ESNext"
   }
 }
 ```
 
 :::info
-
-Any JSX may work well in Proton, it depends on deviations from React/Proton JSX, but you can fix them with [JSX customization](./custom/custom-jsx.md).
-
+Proton JSX is 100% compatible with React JSX, plus additional features for observables and custom attributes.
 :::
 
-## Quick Start
+## Your First Component
 
 ### Code
 

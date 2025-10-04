@@ -4,29 +4,55 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* Proton Brand Colors - Blue theme matching the atomic/scientific concept */
 :root {
-	--ifm-color-primary: hsl(208, 50%, 40%);
-	--ifm-color-primary-dark: hsl(208, 49%, 32%);
-	--ifm-color-primary-darker: hsl(208, 49%, 30%);
-	--ifm-color-primary-darkest: hsl(208, 49%, 25%);
-	--ifm-color-primary-light: hsl(208, 48%, 39%);
-	--ifm-color-primary-lighter: hsl(208, 49%, 40%);
-	--ifm-color-primary-lightest: hsl(208, 48%, 46%);
+	--ifm-color-primary: #2563eb;
+	--ifm-color-primary-dark: #1d4ed8;
+	--ifm-color-primary-darker: #1e40af;
+	--ifm-color-primary-darkest: #1e3a8a;
+	--ifm-color-primary-light: #3b82f6;
+	--ifm-color-primary-lighter: #60a5fa;
+	--ifm-color-primary-lightest: #93c5fd;
 	--ifm-code-font-size: 95%;
-	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+	--docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.1);
+	
+	/* Custom Proton variables */
+	--proton-gradient: linear-gradient(135deg, #2563eb, #3b82f6);
+	--proton-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.2);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* Dark mode with enhanced blue theme */
 [data-theme='dark'] {
-	--ifm-color-primary: hsl(208, 60%, 50%);
-	--ifm-color-primary-dark: hsl(208, 60%, 50%);
-	--ifm-color-primary-darker: hsl(208, 60%, 50%);
-	--ifm-color-primary-darkest: hsl(208, 60%, 50%);
-	--ifm-color-primary-light: hsl(208, 60%, 50%);
-	--ifm-color-primary-lighter: hsl(208, 60%, 50%);
-	--ifm-color-primary-lightest: hsl(208, 60%, 50%);
-	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+	--ifm-color-primary: #60a5fa;
+	--ifm-color-primary-dark: #3b82f6;
+	--ifm-color-primary-darker: #2563eb;
+	--ifm-color-primary-darkest: #1d4ed8;
+	--ifm-color-primary-light: #93c5fd;
+	--ifm-color-primary-lighter: #bfdbfe;
+	--ifm-color-primary-lightest: #dbeafe;
+	--docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.15);
+	
+	/* Enhanced dark theme */
+	--ifm-background-color: #0f172a;
+	--ifm-background-surface-color: #1e293b;
+}
+
+/* Hero section enhancements */
+.hero {
+	background: var(--proton-gradient);
+	color: white;
+}
+
+.hero__title {
+	font-size: 3.5rem;
+	font-weight: 800;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero__subtitle {
+	font-size: 1.25rem;
+	opacity: 0.9;
+	font-weight: 400;
 }
 
 
