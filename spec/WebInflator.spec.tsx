@@ -191,6 +191,28 @@ describe("WebInflator", () => {
     expect(svg.getAttribute("href")).toBe("123")
   })
 
+  it("binds multiple event listener sources from arrays", () => {
+    const events: string[] = []
+
+    const feature = {
+      listeners: {
+        click: () => events.push("feature:click"),
+        hover: () => events.push("feature:hover"),
+      },
+    }
+
+    const element = inflator.inflate(
+      <div on={[feature.listeners, { hover: () => events.push("extra:hover") }]} />
+    ) as HTMLElement
+
+    document.body.append(element)
+
+    element.dispatchEvent(new Event("click"))
+    element.dispatchEvent(new Event("hover"))
+
+    expect(events).toEqual(["feature:click", "feature:hover", "extra:hover"])
+  })
+
   // it("creates SVG and MathML in correct namespace", () => {
   //   const svg = inflator.inflate(<svg><circle /></svg>) as SVGSVGElement
   //   expect(svg.namespaceURI).toContain("svg")

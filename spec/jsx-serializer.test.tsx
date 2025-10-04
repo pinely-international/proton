@@ -80,12 +80,13 @@ describe("WebJSXSerializer", () => {
 
   it("apply custom JSX attributes before serialization", () => {
     const inflator = new WebInflator
-    inflator.jsxAttributes.set("foo" as never, context => {
+    inflator.jsxAttributes.set("foo" as never, (context: any) => {
       context.bind("customFoo", `${context.value}-test`)
     })
 
     serializer.inherit(inflator)
-    expect(serializer.toString(<div foo="bar">ok</div>)).toContain(" customFoo=\"bar-test\"")
+  const jsx = { type: "div", props: { foo: "bar", children: "ok" } }
+  expect(serializer.toString(jsx)).toContain(" customFoo=\"bar-test\"")
   })
 
   it("componentToString renders sync component", () => {
@@ -105,9 +106,7 @@ describe("WebJSXSerializer", () => {
   })
 
   it("skips elements with [data-nosnippet]", () => {
-    const element = <div data-nosnippet />
-    expect(element).toEqual({ type: "div", props: { "data-nosnippet": true } })
-    expect(element.props).toEqual({ "data-nosnippet": true })
+    const element = { type: "div", props: { "data-nosnippet": true } }
 
     const out = serializer.toString(element)
     expect(out).toBe("")

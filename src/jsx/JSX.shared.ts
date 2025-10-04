@@ -94,7 +94,7 @@ declare global {
 
     interface CustomAttributes {
       ns?: LiteralUnion<string, "http://www.w3.org/1999/xhtml" | "http://www.w3.org/2000/svg" | "http://www.w3.org/1998/Math/MathML">
-      on?: HTMLElementEvents
+      on?: HTMLElementEvents | readonly HTMLElementEvents[]
       style?: Attribute<Record<string, Attribute<string | CSSStyleValue>> | { [K in keyof CSSStyleDeclaration]?: Attribute<CSSStyleDeclaration[K] | CSSStyleValue | null | undefined> } | string>
     }
 

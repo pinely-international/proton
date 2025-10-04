@@ -343,10 +343,52 @@ class WebInflator extends Inflator {
     WebInflator.subscribe(style, value => element.style.cssText = String(value))
   }
 
-  protected bindEventListeners(listeners: any, element: Element) {
-    for (const key in listeners) {
-      element.addEventListener(key, listeners[key])
+  protected bindEventListeners(listeners: unknown, element: Element) {
+    for (const [event, handler] of WebInflator.iterateEventBindings(listeners)) {
+      element.addEventListener(event, handler)
     }
+  }
+
+  private static *iterateEventBindings(source: unknown): Iterable<[string, EventListenerOrEventListenerObject]> {
+    if (source == null) return
+
+    if (Array.isArray(source)) {
+      for (const entry of source) {
+        yield* WebInflator.iterateEventBindings(entry)
+      }
+      return
+    }
+
+    if (isRecord(source) === false) return
+
+    for (const key in source) {
+      yield* WebInflator.iterateEventBindingValue(key, (source as Record<string, unknown>)[key])
+    }
+  }
+
+  private static *iterateEventBindingValue(event: string, value: unknown): Iterable<[string, EventListenerOrEventListenerObject]> {
+    if (value == null) return
+
+    if (Array.isArray(value)) {
+      for (const entry of value) {
+        yield* WebInflator.iterateEventBindingValue(event, entry)
+      }
+      return
+    }
+
+    if (WebInflator.isEventListener(value)) {
+      yield [event, value]
+    }
+  }
+
+  private static isEventListener(value: unknown): value is EventListenerOrEventListenerObject {
+    if (typeof value === "function") return true
+
+    if (value instanceof Object && "handleEvent" in value && typeof (value as EventListenerObject).handleEvent === "function") {
+      return true
+    }
+
+    return false
   }
 
   protected bindProperties(props: object, inflated: Element, overridden: Set<string>) {
@@ -373,7 +415,7 @@ class WebInflator extends Inflator {
   protected bindCustomProperties(props: any, element: Element): Set<string> {
     const overrides = new Set<string>()
 
-    if (isRecord(props.on)) {
+    if (isRecord(props.on) || Array.isArray(props.on)) {
       this.bindEventListeners(props.on, element)
       overrides.add("on")
     }
