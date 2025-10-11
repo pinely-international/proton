@@ -3,6 +3,20 @@ import WebInflator from "@/Inflator/web/WebInflator"
 import { kebabCase } from "@/utils/string"
 import { isIterable, isJSX, isObservableGetter, isRecord } from "@/utils/testers"
 
+// Reverse mapping for compressed attribute names
+const reverseMap: Record<string, string> = {
+  cn: "class",
+  ti: "tabIndex",
+  f: "for",
+  className: "class"
+}
+// Reverse mapping for compressed element names
+const elementReverseMap: Record<string, string> = {
+  d: "div"
+  // Add more compressed element mappings here if needed
+}
+// Helper to get original element type
+const getOriginalType = (t: any) => elementReverseMap[String(t)] || String(t)
 
 
 class WebJSXSerializer {
@@ -97,6 +111,7 @@ class WebJSXSerializer {
     this.applyCustomJSXAttributes(props)
 
     let attributes = "", key, value
+    // Use module-level reverseMap for compressed attribute names
     for (key in props) {
       if (key === "on") continue
       if (key === "ns") continue
@@ -107,21 +122,21 @@ class WebJSXSerializer {
       value = props[key]
       if (value == null) continue
 
-      if (key === "className") key = "class"
-      if (key === "style") value = this.styleToString(value)
+      // Map short names back to HTML attribute names
+      const htmlKey = reverseMap[key] || key
+      if (htmlKey === "style") value = this.styleToString(value)
 
       value = this.gettable(value)
       if (value == null) continue
 
-      attributes += " " + key + "=\"" + value + "\""
+      attributes += " " + htmlKey + "=\"" + value + "\""
     }
     return attributes
   }
 
   jsxToString(jsx: JSX.Element): string {
     if (jsx.props == null) {
-      const type = String(jsx.type)
-
+      const type = getOriginalType(jsx.type)
       if (selfClosingTags.has(type)) {
         return "<" + type + "/>"
       }
@@ -135,7 +150,7 @@ class WebJSXSerializer {
     const children = this.toString(jsx.props.children)
     if (jsx.type.constructor === Symbol) return children
 
-    const type = String(jsx.type)
+    const type = getOriginalType(jsx.type)
     const attributes = this.jsxAttributesToString(jsx.props)
 
     if (selfClosingTags.has(type)) {

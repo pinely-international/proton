@@ -30,6 +30,10 @@
     "@denshya/reactive": ">=0.7.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/generator": "^7.28.4",
+    "@babel/parser": "^7.28.4",
+    "@babel/types": "^7.28.4",
     "@types/bun": "latest",
     "@typescript-eslint/eslint-plugin": "^8.19.0",
     "@typescript-eslint/parser": "^8.19.0",
@@ -40,6 +44,7 @@
     "typescript": "^5.9.2",
     "vite": "^7.1.5",
     "vite-bundle-visualizer": "^1.2.1",
+    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-externalize-deps": "^0.9.0"
   },
   "repository": {
