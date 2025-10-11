@@ -1,3 +1,7 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "../src/jsx/jsx-runtime"
+
 import "./dom"
 
 import { State } from "@denshya/reactive"

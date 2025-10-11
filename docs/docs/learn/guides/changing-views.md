@@ -6,6 +6,8 @@ Switching between different markups within a component.
 
 Controls which element is displayed under a component
 
+> For animated swaps, check the [View Transitions guide](./view-transitions.md) to coordinate custom effects and the browser View Transition API.
+
 ```tsx
 function MyView(this: Proton.Component) {
   this.view.set(<div>Hello World!</div>)

@@ -138,6 +138,7 @@ It is very similar to React, it tries to simplify development as we know it in R
 |Feature|Description|
 |-------|-----------|
 |Extended Customization|Custom Attributes, Children Adapters, Element Transformation, Class extension|
+|Transition queue|`this.view.transitions` exposes an awaitable FSM so you can stage view swaps and integrate with `document.startViewTransition`|
 |No built-in State Manager|Any State Manager that supports a Signal-like interface **will just** work in Proton, while there is no enforcement of one|
 |Signals/Observables Support|Native support for [WICG Observables](https://github.com/WICG/observable) and Signal-like structures|
 |No root elements|Any component can be **inflated** and attached anywhere|

@@ -14,6 +14,7 @@ export class ProtonComponent {
   constructor(inflator: Inflator, parent?: ProtonComponent) {
     this.inflator = Inflator.cloneWith(inflator, this)
     this.view = new ViewAPI
+    this.view.attach(this)
     this.tree = new TreeAPI(parent?.tree)
   }
 }
