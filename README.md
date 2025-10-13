@@ -1,5 +1,5 @@
-<h1 align="center">🔵 Proton - UI Composition</h1>
-<h3 align="center">😱 ~5kb gzip, DOM-first, Rootless, Android-style, Component-based, No build</h3>
+<h1 align="center">🐈‍⬛ Tama - Reactive UI Composition</h1>
+<h3 align="center">😱 ~5kb gzip, DOM-first, Rootless, Class-based internals, No build</h3>
 <h4 align="center">Full TypeScript Support, Based on the <a href="https://dev.to/framemuse/no-framework-principle-arised-2n39">No Framework Principle</a></h4>
 
 <p align="center">
