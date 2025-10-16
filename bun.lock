@@ -4,7 +4,7 @@
     "": {
       "name": "@denshya/proton",
       "dependencies": {
-        "@denshya/reactive": "0.7.0",
+        "@denshya/proton": "^0.7.4",
         "node-group": "^0.1.4",
       },
       "devDependencies": {
@@ -24,12 +24,15 @@
         "vite-plugin-externalize-deps": "^0.9.0",
       },
       "peerDependencies": {
+        "@denshya/reactive": ">=0.7.0",
         "type-fest": ">=4.31.0",
       },
     },
   },
   "packages": {
-    "@denshya/reactive": ["@denshya/reactive@0.7.0", "", {}, "sha512-XUDhbJw3VYfYpIfidP3akMgw6FK0SwtjMTUnbsNZoyQIBgaQFuK/ByJmsN4BT4PgtamECsv8msi2o1T/+APweQ=="],
+    "@denshya/proton": ["@denshya/proton@0.7.4", "", { "dependencies": { "node-group": "^0.1.4" }, "peerDependencies": { "@denshya/reactive": ">=0.5.2", "type-fest": ">=4.31.0" } }, "sha512-+9QfsKKERytWPy6DjHGfAG6tg+nDvTpc6v0KCM2uDhd/c5IFtnvw71f8kvFFTMngXeV+bQT8xQdNdDg3Efc8AQ=="],
+
+    "@denshya/reactive": ["@denshya/reactive@0.5.2", "", {}, "sha512-u/zU+aMOQpkTf82MJUr3DYXjdoguimEJ86uqayW6O5YxxslWpPjph5fXHEdgp/IzIGNktcCiekevRGPUZe/LFw=="],
 
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.25.4", "", { "os": "aix", "cpu": "ppc64" }, "sha512-1VCICWypeQKhVbE9oW/sJaAmjLxhVqacdkvPLEjwlttjfwENRSClS8EjBz0KzRyFSCPDIkuXW34Je/vk7zdB7Q=="],
 

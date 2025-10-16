@@ -4,13 +4,20 @@ import { AsyncGeneratorPrototype } from "./BuiltinObjects"
 import { Life } from "./Life"
 import TransitionAPI, { type ViewTransitionEntry } from "./TransitionAPI"
 
+interface TemplateInfo {
+  template: Node
+  dynamicZones: Map<string, Node[]>
+  eventBindings: Map<Node, Map<string, EventListenerOrEventListenerObject[]>>
+  isStale: boolean
+}
 import type { ProtonComponent } from "./Proton/ProtonComponent"
-
 
 class ViewAPI extends EventSignal<unknown> {
   readonly life = new Life
 
   declare default: unknown
+  private templateCache: TemplateInfo | null = null
+  private templateEnabled = true
 
   private component?: ProtonComponent
   private readonly transitionsApi = new TransitionAPI
@@ -175,6 +182,59 @@ class ViewAPI extends EventSignal<unknown> {
 
     return this.component ?? this
   }
+
+
+  /**
+   * Check if template is available and not stale
+   */
+  hasValidTemplate(): boolean {
+    return this.templateCache !== null && !this.templateCache.isStale
+  }
+
+  /**
+   * Get the cached template if available
+   */
+  getTemplate(): TemplateInfo | null {
+    return this.templateCache
+  }
+
+  /**
+   * Set a new template with dynamic zones and event bindings
+   */
+  setTemplate(template: Node, dynamicZones: Map<string, Node[]> = new Map(), eventBindings: Map<Node, Map<string, EventListenerOrEventListenerObject[]>> = new Map()) {
+    this.templateCache = {
+      template: template.cloneNode(true) as Node, // Deep clone for safety
+      dynamicZones: new Map(dynamicZones),
+      eventBindings: new Map(eventBindings),
+      isStale: false
+    }
+  }
+
+
+  /**
+   * Clear the template cache
+   */
+  clearTemplate() {
+    this.templateCache = null
+  }
+
+  /**
+   * Clone the template for hydration
+   */
+  cloneTemplate(): { node: Node, dynamicZones: Map<string, Node[]>, eventBindings: Map<Node, Map<string, EventListenerOrEventListenerObject[]>> } | null {
+    if (!this.templateCache) return null
+
+    const clonedNode = this.templateCache.template.cloneNode(true) as Node
+    
+    // For now, return empty maps - the TemplateHydrator will find dynamic zones fresh
+    // This simplifies the complex node matching logic
+    return {
+      node: clonedNode,
+      dynamicZones: new Map(),
+      eventBindings: new Map()
+    }
+  }
+
 }
 
 export default ViewAPI

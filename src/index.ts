@@ -7,3 +7,6 @@ export { ProtonSwitchWebInflator } from "./Proton/ProtonSwitch"
 export { default as WebJSXSerializer } from "./jsx/JSXSerializer"
 
 export { default as Mount } from "./Mount"
+
+// Template optimization API
+export { markDynamicZone, markDynamicChildren, markDynamicAttrs } from "./jsx/JSXTemplateAPI"

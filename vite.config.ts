@@ -5,21 +5,24 @@ import { externalizeDeps } from "vite-plugin-externalize-deps"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [externalizeDeps({ peerDeps: true })],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
+  plugins: [externalizeDeps({ 
+    peerDeps: false
+  })],
   build: {
     target: false,
     outDir: "build",
-
     minify: false,
     sourcemap: true,
     emptyOutDir: true,
     modulePreload: false,
-
+    rollupOptions: {
+      external: ["type-fest"], // Only externalize type-fest (not used at runtime)
+      output: {
+        globals: {
+          "type-fest": "TypeFest"
+        }
+      }
+    },
     lib: {
       entry: [
         path.resolve(__dirname, "./src/index.ts"),
@@ -29,6 +32,11 @@ export default defineConfig({
       ],
       formats: ["es"]
     }
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
   esbuild: {
     treeShaking: true,
